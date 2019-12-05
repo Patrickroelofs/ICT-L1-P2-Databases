@@ -90,6 +90,15 @@ GO
 
 /* I */
 /* Alle movies die meer dan 8 genres hebben [title, publication_year] */
+SELECT title, publication_year
+FROM Movie
+WHERE movie_id in (
+	SELECT movie_id
+	FROM Movie_Genre
+	GROUP BY movie_id
+	HAVING COUNT(genre_name) > 8
+)
+GO
 
 /* J */
 /* Alle vrouwen die in Horror movies en Family movies gespeeld hebben [firstname,lastname]. */
