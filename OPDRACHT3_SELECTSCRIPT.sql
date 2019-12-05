@@ -128,6 +128,19 @@ GO
 
 /* L */
 /* Alle Genres en het percentage dat de films uit het bepaalde genre uitmaken t.o.v. het totale aantalfilms [genre, percentage], gesorteerd op meest populaire genre */
+DROP VIEW percentage_films
+GO
+
+CREATE VIEW percentage_films AS
+	SELECT genre_name,
+		COUNT(genre_name) AS amount,
+		COUNT(genre_name) * 100 / (SELECT COUNT(*) FROM Movie_Genre) as movie_percentage
+	FROM Movie_Genre
+	GROUP BY genre_name
+GO
+
+SELECT * FROM percentage_films ORDER BY movie_percentage DESC
+GO
 
 /* M */
 /* Gebruikers [mail_adress] en het gemiddelde aantal films die elke gebruiker per dag kijkt. Toon alleen gebruikers die gemiddeld 2 of meer films per dag kijken, met het grootste gemiddelde bovenaan. */
