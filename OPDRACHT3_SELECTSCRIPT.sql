@@ -75,6 +75,18 @@ GO
 
 /* H */
 /* Alle movies die in de afgelopen twee maanden het meest bekeken zijn, gesorteerd naar het aantal keren dat ze gekeken werden. Toon alleen movies die minimaal één keer bekeken zijn [movie title, publication_year, number of times watched]. */
+DROP VIEW most_watched_2Months
+GO
+
+CREATE VIEW most_watched_2Months AS
+	SELECT Movie.title, Movie.publication_year, COUNT(WatchHistory.Movie_id) AS [number of times watched]
+	FROM Movie LEFT OUTER JOIN WatchHistory ON Movie.movie_id = WatchHistory.movie_id
+	WHERE WatchHistory.Watch_date > DATEADD(month, -50, GETDATE())
+	GROUP BY WatchHistory.movie_id, Movie.title, Movie.publication_year
+GO
+
+SELECT * FROM most_watched_2Months ORDER BY [number of times watched]
+GO
 
 /* I */
 /* Alle movies die meer dan 8 genres hebben [title, publication_year] */
