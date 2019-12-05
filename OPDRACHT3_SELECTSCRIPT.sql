@@ -49,16 +49,29 @@ DROP VIEW openstaande_kosten
 GO
 
 CREATE VIEW openstaande_kosten AS
-	SELECT SUM(WH.price) AS total_price, C.lastname, C.firstname
-	FROM Customer C INNER JOIN WatchHistory WH ON C.customer_mail_address = WH.customer_mail_address
-	WHERE WH.invoiced = 0
-	GROUP BY WH.customer_mail_address, c.lastname, c.firstname
+	SELECT SUM(WatchHistory.price) AS total_price, Customer.lastname, Customer.firstname
+	FROM Customer INNER JOIN WatchHistory ON Customer.customer_mail_address = WatchHistory.customer_mail_address
+	WHERE WatchHistory.invoiced = 0
+	GROUP BY WatchHistory.customer_mail_address, Customer.lastname, Customer.firstname
 GO
 
-SELECT *
-from openstaande_kosten
+SELECT * from openstaande_kosten
+GO
+
 /* G */
 /* Toon 100 movies die tot nu toe het minst bekeken zijn, gesorteerd naar het aantal keren dat ze gekeken werden. Dit houdt ook 0 keer in [movie title, number of times watched].Maak een View voor deze informatiebehoefte. */
+DROP VIEW top_100_least_watched
+GO
+
+CREATE VIEW top_100_least_watched AS
+	SELECT top(100) movie.title, count(WatchHistory.movie_id) AS [number of times watched]
+	FROM Movie LEFT OUTER JOIN WatchHistory ON Movie.movie_id = WatchHistory.movie_id
+	GROUP BY WatchHistory.movie_id, Movie.title
+	ORDER BY [number of times watched]asc
+GO
+
+SELECT * FROM top_100_least_watched
+GO
 
 /* H */
 /* Alle movies die in de afgelopen twee maanden het meest bekeken zijn, gesorteerd naar het aantal keren dat ze gekeken werden. Toon alleen movies die minimaal één keer bekeken zijn [movie title, publication_year, number of times watched]. */
