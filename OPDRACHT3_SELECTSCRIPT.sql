@@ -8,12 +8,14 @@ SELECT		title, publication_year, genre_name
 FROM		Movie, Movie_Genre
 WHERE 		Movie.movie_id = Movie_genre.movie_id
 ORDER BY 	genre_name
+GO
 
 /* B */
 /* Alle movies die tussen 1990 en 2010 geproduceerd zijn. */
 SELECT *
 FROM 		Movie
 WHERE 		publication_year BETWEEN 1990 AND 2010
+GO
 
 /* C */
 /* Alle klanten die op dit moment actief zijn (i.e. subscription_end moet leeg zijn, of subscription_end ligt in de toekomst) [customer lastname, firstname, subscription_start] */
@@ -21,6 +23,7 @@ SELECT 		lastname, firstname, subscription_start
 FROM 		Customer
 WHERE 		subscription_end IS NULL
 OR 			subscription_end >= '23-oct-2016'
+GO
 
 /* D */
 /* De cast uit alle Terminator movies uit het jaar 1991 [id, title, firstname, lastname, role] */
@@ -30,6 +33,7 @@ WHERE 		title LIKE '%Terminator%'
 AND 		Person.person_id = Movie_cast.Person_id
 AND 		Movie.Movie_id = Movie_cast.Movie_id
 AND 		Movie.publication_year = 1991
+GO
 
 /* E */
 /* Alle movies waarin de acteur “Arnold Schwarzenegger” een rol speelt [movie title, publication year] */
@@ -37,12 +41,22 @@ SELECT movie.title, movie.publication_year
 FROM Movie  INNER JOIN Movie_Cast on Movie.Movie_id = Movie_Cast.Movie_id
             INNER JOIN Person on Movie_Cast.person_id = Person.Person_id
 WHERE Person.firstname = 'Arnold' AND Person.lastname = 'Schwarzenegger'
-
+GO
 
 /* F */
 /*  Alle gebruikers met openstaande kosten [Customer lastname, firstname, total price]Maak een View voor deze informatiebehoefte. */
+DROP VIEW openstaande_kosten
+GO
 
+CREATE VIEW openstaande_kosten AS
+	SELECT SUM(WH.price) AS total_price, C.lastname, C.firstname
+	FROM Customer C INNER JOIN WatchHistory WH ON C.customer_mail_address = WH.customer_mail_address
+	WHERE WH.invoiced = 0
+	GROUP BY WH.customer_mail_address, c.lastname, c.firstname
+GO
 
+SELECT *
+from openstaande_kosten
 /* G */
 /* Toon 100 movies die tot nu toe het minst bekeken zijn, gesorteerd naar het aantal keren dat ze gekeken werden. Dit houdt ook 0 keer in [movie title, number of times watched].Maak een View voor deze informatiebehoefte. */
 
