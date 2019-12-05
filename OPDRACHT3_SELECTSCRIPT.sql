@@ -116,10 +116,15 @@ AND Movie_Cast.Movie_id in (
 		WHERE genre_name = 'Family'
 	)
 )
-
+GO
 
 /* K */
 /* De director die tot nu toe de meeste films geproduceerd heeft [firstname, lastname]. */
+SELECT Person.firstname, Person.lastname, COUNT(Movie_Directors.movie_id) as amount
+FROM Movie_Directors LEFT OUTER JOIN Person on Movie_Directors.person_id = Person.person_id
+GROUP BY Movie_Directors.person_id, firstname, lastname
+ORDER BY amount DESC
+GO
 
 /* L */
 /* Alle Genres en het percentage dat de films uit het bepaalde genre uitmaken t.o.v. het totale aantalfilms [genre, percentage], gesorteerd op meest populaire genre */
