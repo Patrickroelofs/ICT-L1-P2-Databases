@@ -102,7 +102,6 @@ GO
 
 /* J */
 /* Alle vrouwen die in Horror movies en Family movies gespeeld hebben [firstname,lastname]. */
-/* //TODO: Add Gender to MYIMDB Import database */
 SELECT DISTINCT Person.firstname, Person.lastname
 FROM Movie_Cast LEFT OUTER JOIN Person ON Movie_Cast.person_id = Person.person_id
 WHERE person.gender = 'F'

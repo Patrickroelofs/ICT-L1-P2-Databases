@@ -26,7 +26,7 @@ INSERT  INTO Person
 SELECT  CAST(Id AS int) AS person_id,
         LEFT(Lname, 50) AS lastname,
         LEFT(Fname, 50) AS firstname,
-        NULL AS gender
+        Gender AS gender
 
 FROM MYIMDB.dbo.Imported_Person
 GO
