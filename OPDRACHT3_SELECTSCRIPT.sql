@@ -12,7 +12,7 @@ GO
 
 /* B */
 /* Alle movies die tussen 1990 en 2010 geproduceerd zijn. */
-SELECT *
+SELECT 		*
 FROM 		Movie
 WHERE 		publication_year BETWEEN 1990 AND 2010
 GO
@@ -37,10 +37,10 @@ GO
 
 /* E */
 /* Alle movies waarin de acteur “Arnold Schwarzenegger” een rol speelt [movie title, publication year] */
-SELECT movie.title, movie.publication_year
-FROM Movie  INNER JOIN Movie_Cast on Movie.Movie_id = Movie_Cast.Movie_id
-            INNER JOIN Person on Movie_Cast.person_id = Person.Person_id
-WHERE Person.firstname = 'Arnold' AND Person.lastname = 'Schwarzenegger'
+SELECT 	movie.title, movie.publication_year
+FROM 	Movie  	INNER JOIN Movie_Cast on Movie.Movie_id = Movie_Cast.Movie_id
+            	INNER JOIN Person on Movie_Cast.person_id = Person.Person_id
+WHERE 	Person.firstname = 'Arnold' AND Person.lastname = 'Schwarzenegger'
 GO
 
 /* F */
