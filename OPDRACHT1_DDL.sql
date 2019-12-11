@@ -162,6 +162,8 @@ Dit is niet mogelijk ivm gegevens uit een andere tabel */
 /* Opdracht 1c: Eigen Constraints */
 /* ***************************** */
 
+/* TODO: Add constraints that work with the fletnix Database */
+
 /* Er mag alleen met VISA, Mastercard betaald worden <AMEX is niet beschikbaar> */
 ALTER TABLE Payment
     ADD CONSTRAINT ck_paymentmethod CHECK (payment_method = 'Visa' OR payment_method = 'Mastercard')
