@@ -48,8 +48,23 @@ GO
 
 /* Conversiescript: Customer */
 /* MYIMDB DATABASE Heeft geen Customers dus import ik Customer uit Opdracht 1 Insertscript */
-/* TODO: Insert fletnix docent als customer */
+INSERT  INTO Customer
+SELECT  customer_mail_address as customer_mail_address,
+        lastname as lastname,
+        firstname as firstname,
+        payment_method as payment_method,
+        payment_card_number as payment_card_number,
+        contract_type as contract_type,
+        subscription_start as subscription_start,
+        subscription_end as subscription_end,
+        user_name as user_name,
+        password as password,
+        country_name as country_name,
+        gender as gender,
+        birth_date as birth_date
 
+FROM FLETNIX_DOCENT.dbo.Customer
+GO
 
 /* Conversiescript: Genre */
 INSERT  INTO Genre
