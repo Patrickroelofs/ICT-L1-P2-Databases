@@ -136,4 +136,13 @@ SELECT  contract_type AS contract_type,
 FROM FLETNIX_DOCENT.dbo.Contract
 GO
 
-/* TODO: insert watchhistory from Fletnix_docent */
+/* Conversiescript: Watchhistory */
+INSERT  INTO Watchhistory
+SELECT  movie_id AS movie_id,
+        customer_mail_address AS customer_mail_address,
+        watch_date AS watch_date,
+        price AS price,
+        invoiced as invoiced
+
+FROM FLETNIX_DOCENT.dbo.Watchhistory
+GO
