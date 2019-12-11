@@ -125,7 +125,15 @@ INSERT INTO Payment
 SELECT  payment_method as payment_method
 
 FROM FLETNIX_DOCENT.dbo.Payment
+GO
 
-/* TODO: insert contract from fletnix_docent */
+/* Conversiescript: Contract */
+INSERT  INTO Contract
+SELECT  contract_type AS contract_type,
+        price_per_month AS price_per_month,
+        discount_percentage AS discount_percentage
+
+FROM FLETNIX_DOCENT.dbo.Contract
+GO
 
 /* TODO: insert watchhistory from Fletnix_docent */
