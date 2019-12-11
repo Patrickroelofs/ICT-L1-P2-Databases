@@ -49,19 +49,19 @@ GO
 /* Conversiescript: Customer */
 /* MYIMDB DATABASE Heeft geen Customers dus import ik Customer uit Opdracht 1 Insertscript */
 INSERT  INTO Customer
-SELECT  customer_mail_address as customer_mail_address,
-        lastname as lastname,
-        firstname as firstname,
-        payment_method as payment_method,
-        payment_card_number as payment_card_number,
-        contract_type as contract_type,
-        subscription_start as subscription_start,
-        subscription_end as subscription_end,
-        user_name as user_name,
-        password as password,
-        country_name as country_name,
-        gender as gender,
-        birth_date as birth_date
+SELECT  customer_mail_address   AS customer_mail_address,
+        lastname                AS lastname,
+        firstname               AS firstname,
+        payment_method          AS payment_method,
+        payment_card_number     AS payment_card_number,
+        contract_type           AS contract_type,
+        subscription_start      AS subscription_start,
+        subscription_end        AS subscription_end,
+        user_name               AS user_name,
+        password                AS password,
+        country_name            AS country_name,
+        gender                  AS gender,
+        birth_date              AS birth_date
 
 FROM FLETNIX_DOCENT.dbo.Customer
 GO
@@ -113,8 +113,12 @@ SELECT      CAST (Mid AS INT) AS Movie_id,
 FROM MYIMDB.dbo.Imported_movie_directors
 GO
 
+/* Conversiescript: Country */
+INSERT INTO Country
+SELECT      country_name AS country_name
 
-/* TODO: insert country from fletnix_docent */
+FROM FLETNIX_DOCENT.dbo.country
+GO
 
 /* TODO: insert payment from fletnix_docent */
 
