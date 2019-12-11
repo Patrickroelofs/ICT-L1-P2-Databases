@@ -120,7 +120,11 @@ SELECT      country_name AS country_name
 FROM FLETNIX_DOCENT.dbo.country
 GO
 
-/* TODO: insert payment from fletnix_docent */
+/* Conversiescript: Payment */
+INSERT INTO Payment
+SELECT  payment_method as payment_method
+
+FROM FLETNIX_DOCENT.dbo.Payment
 
 /* TODO: insert contract from fletnix_docent */
 
