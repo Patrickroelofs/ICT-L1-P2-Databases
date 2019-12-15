@@ -45,7 +45,7 @@ GO
 
 /* F */
 /*  Alle gebruikers met openstaande kosten [Customer lastname, firstname, total price]Maak een View voor deze informatiebehoefte. */
-DROP VIEW openstaande_kosten
+DROP VIEW IF EXISTS openstaande_kosten
 GO
 
 CREATE VIEW openstaande_kosten AS
@@ -60,14 +60,14 @@ GO
 
 /* G */
 /* Toon 100 movies die tot nu toe het minst bekeken zijn, gesorteerd naar het aantal keren dat ze gekeken werden. Dit houdt ook 0 keer in [movie title, number of times watched].Maak een View voor deze informatiebehoefte. */
-DROP VIEW top_100_least_watched
+DROP VIEW IF EXISTS top_100_least_watched
 GO
 
 CREATE VIEW top_100_least_watched AS
 	SELECT top(100) movie.title, count(WatchHistory.movie_id) AS [number of times watched]
 	FROM Movie LEFT OUTER JOIN WatchHistory ON Movie.movie_id = WatchHistory.movie_id
 	GROUP BY WatchHistory.movie_id, Movie.title
-	ORDER BY [number of times watched]asc
+	ORDER BY [number of times watched]
 GO
 
 SELECT * FROM top_100_least_watched
@@ -75,7 +75,7 @@ GO
 
 /* H */
 /* Alle movies die in de afgelopen twee maanden het meest bekeken zijn, gesorteerd naar het aantal keren dat ze gekeken werden. Toon alleen movies die minimaal één keer bekeken zijn [movie title, publication_year, number of times watched]. */
-DROP VIEW most_watched_2Months
+DROP VIEW IF EXISTS most_watched_2Months
 GO
 
 CREATE VIEW most_watched_2Months AS
@@ -127,7 +127,7 @@ GO
 
 /* L */
 /* Alle Genres en het percentage dat de films uit het bepaalde genre uitmaken t.o.v. het totale aantalfilms [genre, percentage], gesorteerd op meest populaire genre */
-DROP VIEW percentage_films
+DROP VIEW IF EXISTS percentage_films
 GO
 
 CREATE VIEW percentage_films AS
