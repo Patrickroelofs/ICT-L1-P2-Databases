@@ -143,4 +143,17 @@ GO
 
 /* M */
 /* Gebruikers [mail_adress] en het gemiddelde aantal films die elke gebruiker per dag kijkt. Toon alleen gebruikers die gemiddeld 2 of meer films per dag kijken, met het grootste gemiddelde bovenaan. */
-/* TODO: Opdracht M Selectscript */
+
+DROP VIEW IF EXISTS average_time
+GO
+
+CREATE VIEW average_time AS
+	SELECT WatchHistory.customer_mail_address, (count(*) / 365) as [gemiddelde aantal films]
+	FROM WatchHistory
+	GROUP BY WatchHistory.customer_mail_address
+    HAVING (count(*) / 365) >= 2
+GO
+
+SELECT *
+FROM average_time
+ORDER BY [gemiddelde aantal films] DESC
