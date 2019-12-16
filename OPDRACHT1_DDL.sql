@@ -3,8 +3,7 @@
 /* ***************************** */
 
 /* Delete already existing Fletnix Database if it exists */
-IF EXISTS(SELECT * FROM sys.databases WHERE NAME = 'Fletnix')
-DROP DATABASE Fletnix
+DROP DATABASE IF EXISTS Fletnix
 
 /* Create new database called Fletnix */
 CREATE DATABASE Fletnix
@@ -162,11 +161,9 @@ Dit is niet mogelijk ivm gegevens uit een andere tabel */
 /* Opdracht 1c: Eigen Constraints */
 /* ***************************** */
 
-/* TODO: Add constraints that work with the fletnix Database */
-
-/* Er mag alleen met VISA, Mastercard betaald worden <AMEX is niet beschikbaar> */
+/* Er mag alleen met VISA, Mastercard, Amex betaald worden anderen zijn niet beschikbaar */
 ALTER TABLE Payment
-    ADD CONSTRAINT ck_paymentmethod CHECK (payment_method = 'Visa' OR payment_method = 'Mastercard')
+    ADD CONSTRAINT ck_paymentmethod CHECK (payment_method = 'Visa' OR payment_method = 'Mastercard' OR payment_method = 'Amex')
 
 /* de maximum korting op een product is 50% */
 ALTER TABLE Contract

@@ -1,5 +1,6 @@
-/* TODO: Add Foreign Keys & Primary Keys
-    TODO: Check if foreign/Primary keys are correct */
+/*
+    TODO: Add Foreign Keys
+*/
 
 /* ***************************** */
 /*    Opdracht 4: Normaliseren   */
@@ -13,6 +14,7 @@ DROP TABLE IF EXISTS Awards
 DROP TABLE IF EXISTS Category
 DROP TABLE IF EXISTS Nominees
 DROP TABLE IF EXISTS Award_Status
+DROP TABLE IF EXISTS Status
 GO
 
 
@@ -22,7 +24,7 @@ GO
 CREATE TABLE Awards (
     Award       VARCHAR(255)    NOT NULL,
     Year        NUMERIC(4)      NOT NULL,
-    Country     VARCHAR(255)    NOT NULL,
+    Country     VARCHAR(50)    NOT NULL,
 
     PRIMARY KEY (Award, Country)
 )
@@ -32,21 +34,9 @@ GO
    Category | Award */
 CREATE TABLE Category (
     Category    VARCHAR(255)    NOT NULL,
-    Award       VARCHAR(255)    NOT NULL,
+    Award    VARCHAR(255)    NOT NULL,
 
     PRIMARY KEY (Category, Award)
-)
-GO
-
-/* Table: Nominees
-   Award | Category | Movie_ID | Person_ID */
-CREATE TABLE Nominees (
-    Award       VARCHAR(255)    NOT NULL,
-    Category    VARCHAR(255)    NOT NULL,
-    Movie_id    INT             NOT NULL,
-    Person_id   INT             NOT NULL,
-
-    PRIMARY KEY (Award, Category, Movie_id, Person_id)
 )
 GO
 
@@ -59,6 +49,18 @@ CREATE TABLE Status (
     status      VARCHAR(1)      NOT NULL
 
     PRIMARY KEY (Category, Movie_id, Person_id)
+)
+GO
+
+/* Table: Nominees
+   Award | Category | Movie_ID | Person_ID */
+CREATE TABLE Nominees (
+    Award       VARCHAR(255)    NOT NULL,
+    Category    VARCHAR(255)    NOT NULL,
+    Movie_id    INT             NOT NULL,
+    Person_id   INT             NOT NULL,
+
+    PRIMARY KEY (Award, Category, Movie_id, Person_id)
 )
 GO
 
