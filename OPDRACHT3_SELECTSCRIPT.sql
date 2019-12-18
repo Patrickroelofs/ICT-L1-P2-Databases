@@ -100,6 +100,19 @@ WHERE movie_id in (
 )
 GO
 
+SELECT Movie.title, Movie.publication_year, COUNT(Movie_genre.genre_name)
+
+FROM Movie, movie_genre
+WHERE Movie.movie_id = Movie_Genre.movie_id
+AND Movie.movie_id in (
+	SELECT movie_id
+	FROM Movie_Genre
+	GROUP BY movie_id
+	HAVING COUNT(genre_name) > 8
+)
+GROUP BY Movie.title, Movie.publication_year
+GO
+
 /* J */
 /* Alle vrouwen die in Horror movies en Family movies gespeeld hebben [firstname,lastname]. */
 SELECT DISTINCT Person.firstname, Person.lastname
@@ -147,32 +160,16 @@ GO
 DROP VIEW IF EXISTS average_time
 GO
 
-DROP FUNCTION IF EXISTS dbo.dateCalc
-GO
-
--- CREATE FUNCTION dbo.dateCalc(@endDate DATE, @today DATE)
--- RETURNS DATE
---     AS
---     BEGIN
---         IF(@endDate IS NULL)
---             RETURN @today
---         ELSE IF(@endDate < @today)
---             RETURN @endDate
---         RETURN @today
---     END
--- GO
-
 CREATE VIEW average_time AS
-	SELECT WatchHistory.customer_mail_address, (count(movie_id) / datediff(DAY, Customer.subscription_start, '2019-12-17')) as [gemiddelde aantal films]
-	FROM WatchHistory, Customer
-	GROUP BY WatchHistory.customer_mail_address, Customer.subscription_start
+    SELECT WatchHistory.customer_mail_address, count(watch_date) as [average movies watched in a day]
+    FROM WatchHistory, Customer
+    WHERE WatchHistory.customer_mail_address = Customer.customer_mail_address
+    GROUP BY WatchHistory.customer_mail_address, WatchHistory.watch_date
 GO
+
 SELECT *
 FROM average_time
-ORDER BY [gemiddelde aantal films] DESC
+ORDER BY [average movies watched in a day] DESC
 
--- SELECT * FROM WatchHistory WHERE customer_mail_address = 'Lorem.ipsum@Curabiturconsequat.edu'
--- SELECT * FROM WatchHistory
--- SELECT * FROM Customer
-
--- uitkomst voor 'Lorem.ipsum@Curabiturconsequat.edu' MOET 4.8
+SELECT * FROM WatchHistory
+SELECT * FROM Movie
