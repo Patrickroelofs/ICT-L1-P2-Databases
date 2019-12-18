@@ -147,13 +147,32 @@ GO
 DROP VIEW IF EXISTS average_time
 GO
 
-CREATE VIEW average_time AS
-	SELECT WatchHistory.customer_mail_address, (count(*) / 365) as [gemiddelde aantal films]
-	FROM WatchHistory
-	GROUP BY WatchHistory.customer_mail_address
-    HAVING (count(*) / 365) >= 2
+DROP FUNCTION IF EXISTS dbo.dateCalc
 GO
 
+-- CREATE FUNCTION dbo.dateCalc(@endDate DATE, @today DATE)
+-- RETURNS DATE
+--     AS
+--     BEGIN
+--         IF(@endDate IS NULL)
+--             RETURN @today
+--         ELSE IF(@endDate < @today)
+--             RETURN @endDate
+--         RETURN @today
+--     END
+-- GO
+
+CREATE VIEW average_time AS
+	SELECT WatchHistory.customer_mail_address, (count(movie_id) / datediff(DAY, Customer.subscription_start, '2019-12-17')) as [gemiddelde aantal films]
+	FROM WatchHistory, Customer
+	GROUP BY WatchHistory.customer_mail_address, Customer.subscription_start
+GO
 SELECT *
 FROM average_time
 ORDER BY [gemiddelde aantal films] DESC
+
+-- SELECT * FROM WatchHistory WHERE customer_mail_address = 'Lorem.ipsum@Curabiturconsequat.edu'
+-- SELECT * FROM WatchHistory
+-- SELECT * FROM Customer
+
+-- uitkomst voor 'Lorem.ipsum@Curabiturconsequat.edu' MOET 4.8
