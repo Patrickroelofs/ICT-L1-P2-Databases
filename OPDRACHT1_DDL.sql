@@ -35,7 +35,11 @@ CREATE TABLE Movie (
     previous_part           INT,
     price                   numeric(5,2)    NOT NULL,
     URL                     VARCHAR(255),
-    PRIMARY KEY (movie_id)
+    PRIMARY KEY (movie_id),
+    CONSTRAINT fk_MovieMoviePrevious_MovieMovieID
+    FOREIGN KEY (previous_part) REFERENCES Movie (movie_id)
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 GO
 
@@ -43,7 +47,15 @@ GO
 CREATE TABLE Movie_Directors (
     movie_id                INT             NOT NULL,
     person_id               INT             NOT NULL,
-    PRIMARY KEY(movie_id, person_id)
+    PRIMARY KEY(movie_id, person_id),
+    CONSTRAINT fk_MovieDirectorsmovieDirectors_PersonPersonID
+    FOREIGN KEY (person_id) REFERENCES Person (Person_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_MovieDirectorsmovieDirectors_MovieMovieID
+    FOREIGN KEY (movie_id) REFERENCES Movie (Movie_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 GO
 
@@ -52,7 +64,15 @@ CREATE TABLE Movie_Cast (
     movie_id                INT             NOT NULL,
     person_id               INT             NOT NULL,
     role                    VARCHAR(255)    NOT NULL,
-    PRIMARY KEY(movie_id, person_id, role)
+    PRIMARY KEY(movie_id, person_id, role),
+    CONSTRAINT fk_MovieCastPersonID_PersonPersonID
+    FOREIGN KEY (person_id) REFERENCES person (person_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_MovieCastmovieID_MovieMovieID
+    FOREIGN KEY (movie_id) REFERENCES Movie (Movie_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 GO
 
@@ -68,7 +88,15 @@ GO
 CREATE TABLE Movie_Genre (
     movie_id                INT             NOT NULL,
     genre_name              VARCHAR(255)    NOT NULL,
-    PRIMARY KEY(movie_id, genre_name)
+    PRIMARY KEY(movie_id, genre_name),
+    CONSTRAINT fk_MovieGenreGenreName_GenreGenreName
+    FOREIGN KEY (genre_name) REFERENCES Genre (genre_name)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_MovieGenreMovieID_MovieMovieID
+    FOREIGN KEY (movie_id) REFERENCES Movie (movie_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 )
 GO
 
@@ -121,7 +149,15 @@ CREATE TABLE WatchHistory (
     watch_date              DATE            NOT NULL,
     price                   NUMERIC(5,2)    NOT NULL,
     invoiced                BIT             NOT NULL,
-    PRIMARY KEY(movie_id, customer_mail_address, watch_date)
+    PRIMARY KEY(movie_id, customer_mail_address, watch_date),
+    CONSTRAINT fk_WatchHistoryMovieID_MovieMovieID
+    FOREIGN KEY (movie_id) REFERENCES Movie (movie_id)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_WatchHistoryCustomerMailAddress_CustomerCustomerMailAdres
+    FOREIGN KEY (customer_mail_address) REFERENCES Customer (customer_mail_address)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 )
 GO
 
@@ -178,62 +214,5 @@ ALTER TABLE Customer
 /* ***************************** */
 /* Opdracht 1d: Update & Delete regels */
 /* ***************************** */
-/* TODO: Update & Delete regels in DDL statements zetten */
-/* Table Movie */
-ALTER TABLE Movie
-    ADD CONSTRAINT fk_MovieMoviePrevious_MovieMovieID
-    FOREIGN KEY (previous_part) REFERENCES Movie (movie_id)
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
 
-/* Movie Directors */
-ALTER TABLE Movie_Directors
-    ADD CONSTRAINT fk_MovieDirectorsmovieDirectors_PersonPersonID
-    FOREIGN KEY (person_id) REFERENCES Person (Person_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-ALTER TABLE Movie_Directors
-    ADD CONSTRAINT fk_MovieDirectorsmovieDirectors_MovieMovieID
-    FOREIGN KEY (movie_id) REFERENCES Movie (Movie_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-/* Movie Cast */
-ALTER TABLE Movie_Cast
-    ADD CONSTRAINT fk_MovieCastPersonID_PersonPersonID
-    FOREIGN KEY (person_id) REFERENCES person (person_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-ALTER TABLE Movie_Cast
-    ADD CONSTRAINT fk_MovieCastmovieID_MovieMovieID
-    FOREIGN KEY (movie_id) REFERENCES Movie (Movie_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-/* Movie Genre */
-ALTER TABLE Movie_Genre
-    ADD CONSTRAINT fk_MovieGenreGenreName_GenreGenreName
-    FOREIGN KEY (genre_name) REFERENCES Genre (genre_name)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
-
-ALTER TABLE Movie_Genre
-    ADD CONSTRAINT fk_MovieGenreMovieID_MovieMovieID
-    FOREIGN KEY (movie_id) REFERENCES Movie (movie_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-
-/* Watch History */
-ALTER TABLE WatchHistory
-    ADD CONSTRAINT fk_WatchHistoryMovieID_MovieMovieID
-    FOREIGN KEY (movie_id) REFERENCES Movie (movie_id)
-    ON UPDATE CASCADE
-    ON DELETE NO ACTION
-
-ALTER TABLE WatchHistory
-    ADD CONSTRAINT fk_WatchHistoryCustomerMailAddress_CustomerCustomerMailAdres
-    FOREIGN KEY (customer_mail_address) REFERENCES Customer (customer_mail_address)
-    ON UPDATE CASCADE
-    ON DELETE NO ACTION
+/* Toegevoegd aan DDL statements */
