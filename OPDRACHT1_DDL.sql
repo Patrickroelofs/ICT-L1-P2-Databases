@@ -178,7 +178,7 @@ ALTER TABLE Customer
 /* ***************************** */
 /* Opdracht 1d: Update & Delete regels */
 /* ***************************** */
-
+/* TODO: Update & Delete regels in DDL statements zetten */
 /* Table Movie */
 ALTER TABLE Movie
     ADD CONSTRAINT fk_MovieMoviePrevious_MovieMovieID

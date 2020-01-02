@@ -31,6 +31,7 @@ CREATE TABLE Awards (
     Country     VARCHAR(50)     NOT NULL,
 
     PRIMARY KEY (Award, Year),
+
     FOREIGN KEY (Country) REFERENCES Country (country_name)
 )
 GO
@@ -38,18 +39,17 @@ GO
 /* Table: Nominations
    Award | Year | Category | Movie_ID | Person_ID | Status */
 CREATE TABLE Nominations (
+    Award       VARCHAR(255)    NOT NULL,
+    Year        INT             NOT NULL,
+    Category    VARCHAR(255)    NOT NULL,
     Movie_id    INT             NOT NULL,
     Person_id   INT             NOT NULL,
-    Award       VARCHAR(255)    NOT NULL,
-    Category    VARCHAR(255)    NOT NULL,
-    Year        INT             NOT NULL,
     Status      VARCHAR(1)      NOT NULL,
 
-    PRIMARY KEY (Movie_id, Person_id, Award, Category, Year),
+    PRIMARY KEY (Award, Year, Category, Movie_id, Person_id),
+
+    FOREIGN KEY (Award, Year)   REFERENCES Awards (Award, Year),
     FOREIGN KEY (Movie_id)      REFERENCES Movie (Movie_id),
--- TODO: Gives error
---     FOREIGN KEY (Award)         REFERENCES Awards (Award),
---     FOREIGN KEY (Year)          REFERENCES Awards (Year),
     FOREIGN KEY (Person_id)     REFERENCES Person (Person_id),
     FOREIGN KEY (Status)        REFERENCES Status (Status)
         ON UPDATE NO ACTION
@@ -58,6 +58,7 @@ CREATE TABLE Nominations (
 GO
 
 /* Opdracht 4C: Populeer de database met ontbrekende data */
+/* TODO: Populate database with data */
 
 /* INSERT INTO: Status */
 INSERT INTO Status (Status, StatusName) VALUES

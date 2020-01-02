@@ -42,13 +42,13 @@ values
 
 /* GOED */
 insert into Customer
-	(customer_mail_address, last_name, first_name, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
+	(customer_mail_address, lastname, firstname, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
 values 
 	('email@hotmail.com', 'Timothy', 'Thomas', 'Mastercard', 1985758236, 'basic', '01-jan-2015', '15-oct-2015', 'username', 'password', 'The United States', 'M', '18-nov-1962')
 
 /* FOUT */
 insert into Customer
-	(customer_mail_address, last_name, first_name, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
+	(customer_mail_address, lastname, firstname, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
 values 
 	('emailtwee@outlook.com', 'Thimothy', 'Tomas', 'Visa', 8799545685, 'premium', '10-nov-2016', '10-dec-2014', 'username2', 'password', 'The United States', 'M', '18-feb-1962')
 
@@ -58,13 +58,13 @@ values
 
 /* GOED */
 insert into Customer
-	(customer_mail_address, last_name, first_name, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
+	(customer_mail_address, lastname, firstname, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
 values 
 	('emaildrie@hotmail.com', 'Thomas', 'Thimothy', 'Mastercard', 0001112223, 'basic', '01-jan-2015', '15-oct-2015', 'username3', 'password', 'The Netherlands', 'M', '18-feb-1962')
 
 /* FOUT */
 insert into Customer
-	(customer_mail_address, last_name, first_name, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
+	(customer_mail_address, lastname, firstname, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
 values 
 	('emaildrie@hotmail.com', 'Thomas', 'Thimothy', 'Mastercard', 3334445556, 'basic', '01-jan-2015', '15-oct-2015', 'username3', 'password', 'The Netherlands', 'M', '18-feb-1962')
 
@@ -105,12 +105,12 @@ VALUES
 /* Het geslacht van een klant in Customer mag alleen 'M' of 'F' Zijn */
 /* GOED */
 insert into Customer
-	(customer_mail_address, last_name, first_name, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
+	(customer_mail_address, lastname, firstname, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
 values 
 	('nepmail@gmail.com', 'achternaam68', 'voornaam68', 'Mastercard', 1425147845, 'basic', '01-jan-2015', '15-oct-2015', 'KOM', 'usernameoriginal2', 'The United States', 'M', '25-jun-1980')  
 
 /* FOUT */
 insert into Customer
-	(customer_mail_address, last_name, first_name, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
+	(customer_mail_address, lastname, firstname, payment_method, payment_card_number, contract_type, subscription_start, subscription_end, user_name, password, country_name, gender, birth_date)
 values 
 	('nepmailtwee@gmail.com', 'achternaam69', 'voornaam69', 'Mastercard', 1425147845, 'basic', '01-jan-2015', '15-oct-2015', 'usernameoriginal2', 'oops69', 'The Netherlands', 'G', '25-jun-1980')  

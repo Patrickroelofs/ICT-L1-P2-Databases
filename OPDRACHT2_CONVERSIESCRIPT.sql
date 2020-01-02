@@ -14,7 +14,10 @@ DELETE FROM Movie;
 DELETE FROM Customer;
 DELETE FROM Payment;
 DELETE FROM Contract;
+DELETE FROM Awards;
 DELETE FROM Country;
+DELETE FROM Nominations;
+DELETE FROM Status;
 GO
 
 /* ***************************** */
@@ -29,6 +32,16 @@ SELECT  CAST(Id AS int) AS person_id,
         Gender AS gender
 
 FROM MYIMDB.dbo.Imported_Person
+GO
+
+/* Conversiescript: Person */
+INSERT INTO Person
+SELECT  DISTINCT    CAST(Id as INT)+845465 as person_id,
+                    LEFT(Lname, 50) AS lastname,
+                    LEFT(Fname, 50) AS firstname,
+                    NULL AS gender
+
+FROM MYIMDB.dbo.Imported_Directors
 GO
 
 /* Conversiescript: Movie */
@@ -93,16 +106,6 @@ SELECT DISTINCT Mid AS Movie_id,
                 Role as role
 
 FROM MYIMDB.dbo.Imported_Cast
-GO
-
-/* Conversiescript: Person */
-INSERT INTO Person
-SELECT  DISTINCT    CAST(Id as INT)+845465 as person_id,
-                    LEFT(Lname, 50) AS lastname,
-                    LEFT(Fname, 50) AS firstname,
-                    NULL AS gender
-
-FROM MYIMDB.dbo.Imported_Directors
 GO
 
 /* Conversiescript: Movie_Directors */
