@@ -100,19 +100,6 @@ WHERE movie_id in (
 )
 GO
 
-SELECT Movie.title, Movie.publication_year, COUNT(Movie_genre.genre_name)
-
-FROM Movie, movie_genre
-WHERE Movie.movie_id = Movie_Genre.movie_id
-AND Movie.movie_id in (
-	SELECT movie_id
-	FROM Movie_Genre
-	GROUP BY movie_id
-	HAVING COUNT(genre_name) > 8
-)
-GROUP BY Movie.title, Movie.publication_year
-GO
-
 /* J */
 /* Alle vrouwen die in Horror movies en Family movies gespeeld hebben [firstname,lastname]. */
 SELECT DISTINCT Person.firstname, Person.lastname
@@ -122,11 +109,7 @@ AND Movie_Cast.Movie_id in (
 	SELECT Movie_id
 	FROM Movie_Genre
 	WHERE genre_name = 'Horror'
-	AND movie_id in (
-		SELECT Movie_id
-		FROM Movie_Genre
-		WHERE genre_name = 'Family'
-	)
+	OR genre_name = 'Family'
 )
 GO
 
