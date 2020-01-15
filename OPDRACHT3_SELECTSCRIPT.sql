@@ -102,6 +102,7 @@ GO
 
 /* J */
 /* Alle vrouwen die in Horror movies en Family movies gespeeld hebben [firstname,lastname]. */
+/* Vrouwen die in horror films en Family spelen */
 SELECT DISTINCT Person.firstname, Person.lastname
 FROM Movie_Cast LEFT OUTER JOIN Person ON Movie_Cast.person_id = Person.person_id
 WHERE person.gender = 'F'
@@ -110,6 +111,23 @@ AND Movie_Cast.Movie_id in (
 	FROM Movie_Genre
 	WHERE genre_name = 'Horror'
 	OR genre_name = 'Family'
+)
+GO
+
+/* Je kan de vraag ook zo zien */
+/* Vrouwen die in horror, family spelen. */
+SELECT DISTINCT Person.firstname, Person.lastname
+FROM Movie_Cast LEFT OUTER JOIN Person ON Movie_Cast.person_id = Person.person_id
+WHERE person.gender = 'F'
+AND Movie_Cast.Movie_id in (
+	SELECT Movie_id
+	FROM Movie_Genre
+	WHERE genre_name = 'Horror'
+	AND movie_id in (
+        SELECT Movie_id
+        FROM Movie_Genre
+        WHERE genre_name = 'Family'
+	)
 )
 GO
 
