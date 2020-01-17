@@ -1,3 +1,5 @@
 .pbix filter=lfs diff=lfs merge=lfs -text
 .zip filter=lfs diff=lfs merge=lfs -text
 OPDRACHT6_RAPPORTEN.pbix filter=lfs diff=lfs merge=lfs -text
+Databases filter=lfs diff=lfs merge=lfs -text
+beroepsproduct.zip filter=lfs diff=lfs merge=lfs -text
