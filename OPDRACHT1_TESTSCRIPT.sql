@@ -28,13 +28,13 @@ VALUES
 INSERT INTO Movie
     (movie_id, title, duration, description, publication_year, cover_image, previous_part, price, URL)
 VALUES
-    (19, 'MovieGood', 130, 'Description of MovieGood', 2017, NULL, NULL, 2.50, 'http://')
+    (22, 'MovieGood', 130, 'Description of MovieGood', 2017, NULL, NULL, 2.50, 'http://')
 
 /* FOUT */
 insert into Movie
 	(movie_id, title, duration, description, publication_year, cover_image, previous_part, price, URL)
 values 
-	(11, 'MovieBad', 123, 'Description of MovieBad', 1800, NULL, NULL, 2.50, 'http://')
+	(23, 'MovieBad', 123, 'Description of MovieBad', 1800, NULL, NULL, 2.50, 'http://')
 
 
 
@@ -84,7 +84,7 @@ values
 insert into Payment
 	(payment_method)
 values
-	('AMEX')
+	('Pizza')
 
 
 /* de maximum korting op een product is 50% */

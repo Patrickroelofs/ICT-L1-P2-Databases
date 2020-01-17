@@ -81,7 +81,7 @@ GO
 CREATE VIEW most_watched_2Months AS
 	SELECT Movie.title, Movie.publication_year, COUNT(WatchHistory.Movie_id) AS [number of times watched]
 	FROM Movie LEFT OUTER JOIN WatchHistory ON Movie.movie_id = WatchHistory.movie_id
-	WHERE WatchHistory.Watch_date > DATEADD(month, -50, GETDATE())
+	WHERE WatchHistory.Watch_date > DATEADD(month, -2, GETDATE())
 	GROUP BY WatchHistory.movie_id, Movie.title, Movie.publication_year
 GO
 
@@ -133,7 +133,7 @@ GO
 
 /* K */
 /* De director die tot nu toe de meeste films geproduceerd heeft [firstname, lastname]. */
-SELECT Person.firstname, Person.lastname, COUNT(Movie_Directors.movie_id) as amount
+SELECT TOP(1) Person.firstname, Person.lastname, COUNT(Movie_Directors.movie_id) as amount
 FROM Movie_Directors LEFT OUTER JOIN Person on Movie_Directors.person_id = Person.person_id
 GROUP BY Movie_Directors.person_id, firstname, lastname
 ORDER BY amount DESC

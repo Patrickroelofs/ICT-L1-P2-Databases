@@ -138,7 +138,10 @@ CREATE TABLE Customer (
     country_name            VARCHAR(50)     NOT NULL,
     gender                  CHAR(1),
     birth_date              DATE,
-    PRIMARY KEY(customer_mail_address)
+    PRIMARY KEY(customer_mail_address),
+    FOREIGN KEY (contract_type) REFERENCES Contract (contract_type)
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 )
 GO
 

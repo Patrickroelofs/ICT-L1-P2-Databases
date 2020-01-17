@@ -59,6 +59,15 @@ SELECT  CAST(Id AS INT) AS movie_id,
 FROM MYIMDB.dbo.Imported_Movie
 GO
 
+/* Conversiescript: Contract */
+INSERT  INTO Contract
+SELECT  contract_type AS contract_type,
+        price_per_month AS price_per_month,
+        discount_percentage AS discount_percentage
+
+FROM FLETNIX_DOCENT.dbo.Contract
+GO
+
 /* Conversiescript: Customer */
 /* MYIMDB DATABASE Heeft geen Customers dus import ik Customer uit Opdracht 1 Insertscript */
 INSERT  INTO Customer
@@ -81,8 +90,8 @@ GO
 
 /* Conversiescript: Genre */
 INSERT  INTO Genre
-SELECT  DISTINCT Genre AS genre_name,
-        NULL AS description
+SELECT  DISTINCT    Genre AS genre_name,
+                    NULL AS description
 
 FROM MYIMDB.dbo.Imported_Genre
 GO
@@ -128,15 +137,6 @@ INSERT INTO Payment
 SELECT  payment_method as payment_method
 
 FROM FLETNIX_DOCENT.dbo.Payment
-GO
-
-/* Conversiescript: Contract */
-INSERT  INTO Contract
-SELECT  contract_type AS contract_type,
-        price_per_month AS price_per_month,
-        discount_percentage AS discount_percentage
-
-FROM FLETNIX_DOCENT.dbo.Contract
 GO
 
 /* Conversiescript: Watchhistory */
