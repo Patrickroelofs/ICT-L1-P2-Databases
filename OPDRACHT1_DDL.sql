@@ -172,7 +172,7 @@ GO
 
 /* Het geslacht (gender) van een persoon (Person) moet ‘M’ (male) of ‘F’ (female) zijn. */
 ALTER TABLE Person
-    ADD CONSTRAINT ck_persongender CHECK (gender IN ('M', 'F'))
+    ADD CONSTRAINT ck_persongender CHECK (gender IS NULL OR gender IN ('M', 'F'))
 
 /* Het publicatie jaar (publication_year) van een film (Movie) moet tussen 1890 en het huidige jaar zijn. */
 ALTER TABLE Movie
@@ -210,7 +210,7 @@ ALTER TABLE Contract
 
 /* Het geslacht van een klant in Customer mag alleen 'M' of 'F' Zijn */
 ALTER TABLE Customer
-    ADD CONSTRAINT ck_customergender CHECK (gender IN ('M', 'F'))
+    ADD CONSTRAINT ck_customergender CHECK (gender IS NULL OR gender IN ('M', 'F'))
 
 
 
